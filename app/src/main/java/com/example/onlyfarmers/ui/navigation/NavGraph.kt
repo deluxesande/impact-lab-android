@@ -13,12 +13,17 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.onlyfarmers.ui.screens.AuthScreen
 import com.example.onlyfarmers.ui.screens.SplashScreen
+import com.example.onlyfarmers.ui.screens.consumer.AccountScreen
 import com.example.onlyfarmers.ui.screens.consumer.AiChatScreen
 import com.example.onlyfarmers.ui.screens.consumer.CartScreen
+import com.example.onlyfarmers.ui.screens.consumer.ConsumerOrdersScreen
 import com.example.onlyfarmers.ui.screens.consumer.HomeScreen
+import com.example.onlyfarmers.ui.screens.consumer.ProductDetailScreen
+import com.example.onlyfarmers.ui.screens.consumer.SearchScreen
 import com.example.onlyfarmers.ui.screens.consumer.TrackingScreen
 import com.example.onlyfarmers.ui.screens.farmer.DashboardScreen
 import com.example.onlyfarmers.ui.screens.farmer.EarningsScreen
+import com.example.onlyfarmers.ui.screens.farmer.FarmerProfileScreen
 import com.example.onlyfarmers.ui.screens.farmer.NewListingScreen
 import com.example.onlyfarmers.ui.screens.farmer.OrdersScreen
 
@@ -45,11 +50,22 @@ fun NavGraph(navController: NavHostController = rememberNavController()) {
         composable(Screen.AiChat.route) { AiChatScreen(navController, lang, { lang = it }) }
         composable(Screen.Cart.route) { CartScreen(navController, lang, { lang = it }) }
         composable(Screen.Tracking.route) { TrackingScreen(navController, lang, { lang = it }) }
+        composable(Screen.Search.route) { SearchScreen(navController, lang, { lang = it }) }
+        composable(Screen.ConsumerOrders.route) { ConsumerOrdersScreen(navController, lang, { lang = it }) }
+        composable(Screen.Account.route) { AccountScreen(navController, lang, { lang = it }) }
+        composable(
+            route = Screen.ProductDetail.route,
+            arguments = listOf(navArgument("name") { type = NavType.StringType }),
+        ) { backStackEntry ->
+            val name = backStackEntry.arguments?.getString("name") ?: ""
+            ProductDetailScreen(navController, name, lang, { lang = it })
+        }
 
         // Farmer
         composable(Screen.FarmerDashboard.route) { DashboardScreen(navController, lang, { lang = it }) }
         composable(Screen.NewListing.route) { NewListingScreen(navController, lang, { lang = it }) }
         composable(Screen.FarmerOrders.route) { OrdersScreen(navController, lang, { lang = it }) }
         composable(Screen.Earnings.route) { EarningsScreen(navController, lang, { lang = it }) }
+        composable(Screen.FarmerProfile.route) { FarmerProfileScreen(navController, lang, { lang = it }) }
     }
 }

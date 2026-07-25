@@ -295,7 +295,12 @@ fun HomeScreen(navController: NavController, lang: String, onLangChange: (String
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     row.forEach { item ->
-                        ProduceCard(item = item, lang = lang, modifier = Modifier.weight(1f))
+                        ProduceCard(
+                            item = item,
+                            lang = lang,
+                            onClick = { navController.navigate(Screen.ProductDetail.createRoute(item.name)) },
+                            modifier = Modifier.weight(1f),
+                        )
                     }
                     if (row.size == 1) Spacer(Modifier.weight(1f))
                 }
@@ -313,12 +318,13 @@ fun HomeScreen(navController: NavController, lang: String, onLangChange: (String
 }
 
 @Composable
-private fun ProduceCard(item: Produce, lang: String, modifier: Modifier = Modifier) {
+private fun ProduceCard(item: Produce, lang: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .clip(RoundedCornerShape(16.dp))
             .border(1.dp, BoardInk.copy(alpha = 0.07f), RoundedCornerShape(16.dp))
-            .background(Color.White),
+            .background(Color.White)
+            .clickable(onClick = onClick),
     ) {
         Box(
             modifier = Modifier

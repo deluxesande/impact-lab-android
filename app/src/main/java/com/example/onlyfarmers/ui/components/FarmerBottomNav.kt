@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AccountBalanceWallet
+import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.ReceiptLong
 import androidx.compose.material3.Icon
@@ -34,7 +35,7 @@ import com.example.onlyfarmers.ui.theme.Cream
 import com.example.onlyfarmers.ui.theme.FarmLime
 import com.example.onlyfarmers.ui.theme.TextOnDarkMuted
 
-enum class FarmerTab { Home, Orders, Pesa }
+enum class FarmerTab { Home, Orders, Pesa, Account }
 
 @Composable
 fun FarmerBottomNav(
@@ -78,6 +79,15 @@ fun FarmerBottomNav(
             onClick = {
                 if (activeTab != FarmerTab.Pesa)
                     navController.navigate(Screen.Earnings.route)
+            },
+        )
+        FarmerNavTab(
+            icon = Icons.Rounded.AccountCircle,
+            label = if (lang == "EN") "Account" else "Akaunti",
+            active = activeTab == FarmerTab.Account,
+            onClick = {
+                if (activeTab != FarmerTab.Account)
+                    navController.navigate(Screen.FarmerProfile.route)
             },
         )
     }

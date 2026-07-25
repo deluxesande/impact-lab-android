@@ -68,7 +68,10 @@ fun ConsumerBottomNav(
             icon = Icons.Rounded.Search,
             label = "Search",
             active = activeTab == ConsumerTab.Search,
-            onClick = {},
+            onClick = {
+                if (activeTab != ConsumerTab.Search)
+                    navController.navigate(Screen.Search.route)
+            },
         )
         Box {
             NavTab(
@@ -103,13 +106,19 @@ fun ConsumerBottomNav(
             icon = Icons.Rounded.ReceiptLong,
             label = "Orders",
             active = activeTab == ConsumerTab.Orders,
-            onClick = {},
+            onClick = {
+                if (activeTab != ConsumerTab.Orders)
+                    navController.navigate(Screen.ConsumerOrders.route)
+            },
         )
         NavTab(
             icon = Icons.Rounded.AccountCircle,
             label = "Account",
             active = activeTab == ConsumerTab.Account,
-            onClick = {},
+            onClick = {
+                if (activeTab != ConsumerTab.Account)
+                    navController.navigate(Screen.Account.route)
+            },
         )
     }
 }

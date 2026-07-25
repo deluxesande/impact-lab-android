@@ -73,7 +73,8 @@ fun DashboardScreen(navController: NavController, lang: String, onLangChange: (S
                     modifier = Modifier
                         .size(42.dp)
                         .clip(CircleShape)
-                        .background(Cream.copy(alpha = 0.14f)),
+                        .background(Cream.copy(alpha = 0.14f))
+                        .clickable { navController.navigate(Screen.FarmerProfile.route) },
                 )
                 Spacer(Modifier.width(12.dp))
                 Column(modifier = Modifier.weight(1f)) {

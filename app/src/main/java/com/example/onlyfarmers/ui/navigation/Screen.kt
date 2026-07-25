@@ -12,6 +12,15 @@ sealed class Screen(val route: String) {
     object AiChat : Screen("consumer/ai_chat")
     object Cart : Screen("consumer/cart")
     object Tracking : Screen("consumer/tracking")
+    object Search : Screen("consumer/search")
+    object ConsumerOrders : Screen("consumer/orders")
+    object Account : Screen("consumer/account")
+    object ProductDetail : Screen("consumer/product/{name}") {
+        fun createRoute(name: String) = "consumer/product/$name"
+    }
+
+    // Farmer
+    object FarmerProfile : Screen("farmer/profile")
 
     // Farmer
     object FarmerDashboard : Screen("farmer/dashboard")
