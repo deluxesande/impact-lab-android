@@ -23,6 +23,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AutoAwesome
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.icons.rounded.Mic
+import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -108,7 +109,10 @@ fun HomeScreen(navController: NavController, lang: String, onLangChange: (String
                         color = TextMuted,
                     )
                     Spacer(Modifier.height(3.dp))
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.clickable { navController.navigate(Screen.LocationPicker.route) },
+                    ) {
                         Text(
                             text = "Kilimani, Nairobi",
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
@@ -123,13 +127,17 @@ fun HomeScreen(navController: NavController, lang: String, onLangChange: (String
                     }
                 }
                 LangPill(selected = lang, onSelect = onLangChange, onDark = false)
-                Spacer(Modifier.width(10.dp))
+                Spacer(Modifier.width(8.dp))
                 Box(
                     modifier = Modifier
                         .size(38.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFFE8E6DF)),
-                )
+                        .background(Color(0xFFE8E6DF))
+                        .clickable { navController.navigate(Screen.Notifications.route) },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(Icons.Rounded.Notifications, null, tint = BoardInk, modifier = Modifier.size(18.dp))
+                }
             }
 
             // Search bar

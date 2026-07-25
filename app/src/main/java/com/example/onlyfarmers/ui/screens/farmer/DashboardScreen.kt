@@ -24,6 +24,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowForward
 import androidx.compose.material.icons.rounded.CameraAlt
 import androidx.compose.material.icons.rounded.Mic
+import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material.icons.rounded.TrendingUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -89,6 +90,17 @@ fun DashboardScreen(navController: NavController, lang: String, onLangChange: (S
                         color = TextOnDarkMuted,
                     )
                 }
+                Box(
+                    modifier = Modifier
+                        .size(36.dp)
+                        .clip(CircleShape)
+                        .background(Cream.copy(alpha = 0.12f))
+                        .clickable { navController.navigate(Screen.FarmerNotifications.route) },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(Icons.Rounded.Notifications, null, tint = Cream, modifier = Modifier.size(18.dp))
+                }
+                Spacer(Modifier.width(4.dp))
                 LangPill(selected = lang, onSelect = onLangChange, onDark = true)
             }
 
@@ -99,6 +111,7 @@ fun DashboardScreen(navController: NavController, lang: String, onLangChange: (S
                     .padding(horizontal = 20.dp)
                     .clip(RoundedCornerShape(22.dp))
                     .background(FarmLime)
+                    .clickable { navController.navigate(Screen.RateHistory.route) }
                     .padding(horizontal = 20.dp, vertical = 18.dp),
             ) {
                 Row(

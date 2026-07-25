@@ -150,6 +150,16 @@ fun SplashScreen(navController: NavController, lang: String, onLangChange: (Stri
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth(),
             )
+            Spacer(Modifier.height(12.dp))
+            Text(
+                text = if (lang == "EN") "New here? See how it works →" else "Mgeni? Angalia jinsi inavyofanya kazi →",
+                style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.5.sp),
+                color = FarmLime.copy(alpha = 0.7f),
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { navController.navigate(Screen.Onboarding.route) },
+            )
 
             Spacer(Modifier.height(30.dp))
         }

@@ -43,6 +43,7 @@ import androidx.navigation.NavController
 import com.example.onlyfarmers.ui.components.FarmerBottomNav
 import com.example.onlyfarmers.ui.components.FarmerTab
 import com.example.onlyfarmers.ui.components.LangPill
+import androidx.compose.foundation.clickable
 import com.example.onlyfarmers.ui.navigation.Screen
 import com.example.onlyfarmers.ui.theme.BoardInk
 import com.example.onlyfarmers.ui.theme.Cream
@@ -177,16 +178,31 @@ fun FarmerProfileScreen(navController: NavController, lang: String, onLangChange
 
             // Active listings
             Column(modifier = Modifier.padding(horizontal = 20.dp)) {
-                Text(
-                    text = if (lang == "EN") "ACTIVE LISTINGS" else "ORODHA ZINAZOENDELEA",
-                    style = MaterialTheme.typography.labelSmall.copy(
-                        fontFamily = FontFamily.Monospace,
-                        fontWeight = FontWeight.SemiBold,
-                        letterSpacing = 0.09.em,
-                        fontSize = 10.sp,
-                    ),
-                    color = TextOnDarkMuted,
-                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = if (lang == "EN") "ACTIVE LISTINGS" else "ORODHA ZINAZOENDELEA",
+                        style = MaterialTheme.typography.labelSmall.copy(
+                            fontFamily = FontFamily.Monospace,
+                            fontWeight = FontWeight.SemiBold,
+                            letterSpacing = 0.09.em,
+                            fontSize = 10.sp,
+                        ),
+                        color = TextOnDarkMuted,
+                    )
+                    Text(
+                        text = if (lang == "EN") "See all" else "Ona zote",
+                        style = MaterialTheme.typography.labelSmall.copy(
+                            fontFamily = FontFamily.Monospace,
+                            fontWeight = FontWeight.SemiBold,
+                        ),
+                        color = FarmLime,
+                        modifier = Modifier.clickable { navController.navigate(Screen.FarmerListings.route) },
+                    )
+                }
                 Spacer(Modifier.height(10.dp))
                 Column(
                     modifier = Modifier
@@ -283,6 +299,7 @@ fun FarmerProfileScreen(navController: NavController, lang: String, onLangChange
                     DarkSettingsRow(
                         icon = Icons.Rounded.HelpOutline,
                         label = if (lang == "EN") "Help & FAQ" else "Msaada & Maswali",
+                        onClick = { navController.navigate(Screen.HelpFAQ.route) },
                     )
                 }
                 Spacer(Modifier.height(10.dp))
@@ -350,11 +367,11 @@ private fun FarmerStat(value: String, label: String) {
 }
 
 @Composable
-private fun DarkSettingsRow(icon: ImageVector, label: String, value: String? = null) {
+private fun DarkSettingsRow(icon: ImageVector, label: String, value: String? = null, onClick: (() -> Unit)? = null) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { }
+            .clickable { onClick?.invoke() }
             .padding(horizontal = 16.dp, vertical = 14.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),

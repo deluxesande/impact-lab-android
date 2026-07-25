@@ -162,6 +162,7 @@ fun AccountScreen(navController: NavController, lang: String, onLangChange: (Str
                 SettingsRow(
                     icon = Icons.Rounded.HelpOutline,
                     label = if (lang == "EN") "Help & FAQ" else "Msaada & Maswali",
+                    onClick = { navController.navigate(Screen.HelpFAQ.route) },
                 )
                 SettingsDivider()
                 SettingsRow(
@@ -272,11 +273,12 @@ private fun SettingsRow(
     label: String,
     value: String? = null,
     trailing: (@Composable () -> Unit)? = null,
+    onClick: (() -> Unit)? = null,
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { }
+            .clickable { onClick?.invoke() }
             .padding(horizontal = 16.dp, vertical = 14.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),

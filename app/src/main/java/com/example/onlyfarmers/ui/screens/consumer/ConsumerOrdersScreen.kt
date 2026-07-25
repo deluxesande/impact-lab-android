@@ -1,6 +1,7 @@
 package com.example.onlyfarmers.ui.screens.consumer
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,6 +39,7 @@ import androidx.navigation.NavController
 import com.example.onlyfarmers.ui.components.ConsumerBottomNav
 import com.example.onlyfarmers.ui.components.ConsumerTab
 import com.example.onlyfarmers.ui.components.LangPill
+import com.example.onlyfarmers.ui.navigation.Screen
 import com.example.onlyfarmers.ui.theme.BoardInk
 import com.example.onlyfarmers.ui.theme.BuyerGreen
 import com.example.onlyfarmers.ui.theme.ConsumerBg
@@ -181,7 +183,11 @@ fun ConsumerOrdersScreen(navController: NavController, lang: String, onLangChang
                 verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 pastOrders.forEach { order ->
-                    OrderCard(order = order, lang = lang)
+                    OrderCard(
+                        order = order,
+                        lang = lang,
+                        onClick = { navController.navigate(Screen.OrderDetail.createRoute(order.ref)) },
+                    )
                 }
             }
 
@@ -197,7 +203,7 @@ fun ConsumerOrdersScreen(navController: NavController, lang: String, onLangChang
 }
 
 @Composable
-private fun OrderCard(order: ConsumerOrder, lang: String) {
+private fun OrderCard(order: ConsumerOrder, lang: String, onClick: () -> Unit = {}) {
     val (statusIcon, statusColor, statusLabel, statusLabelSw) = when (order.status) {
         OrderStatus.Delivered -> Quad(Icons.Rounded.CheckCircle, BuyerGreen, "Delivered", "Imewasilishwa")
         OrderStatus.InTransit -> Quad(Icons.Rounded.LocalShipping, SavingsOrange, "On the way", "Inakuja")
@@ -209,6 +215,7 @@ private fun OrderCard(order: ConsumerOrder, lang: String) {
             .fillMaxWidth()
             .clip(RoundedCornerShape(18.dp))
             .background(LightSurface)
+            .clickable(onClick = onClick)
             .padding(16.dp),
     ) {
         Row(

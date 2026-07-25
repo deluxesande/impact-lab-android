@@ -288,7 +288,7 @@ fun CartScreen(navController: NavController, lang: String, onLangChange: (String
                     .height(62.dp)
                     .clip(RoundedCornerShape(16.dp))
                     .background(BuyerGreen)
-                    .clickable { navController.navigate(Screen.Tracking.route) }
+                    .clickable { navController.navigate(Screen.Checkout.route) }
                     .padding(horizontal = 22.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
