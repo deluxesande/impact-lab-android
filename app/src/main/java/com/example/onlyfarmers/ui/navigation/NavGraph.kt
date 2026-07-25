@@ -47,9 +47,9 @@ fun NavGraph(navController: NavHostController = rememberNavController()) {
         composable(Screen.Tracking.route) { TrackingScreen(navController, lang, { lang = it }) }
 
         // Farmer
-        composable(Screen.FarmerDashboard.route) { DashboardScreen(navController) }
-        composable(Screen.NewListing.route) { NewListingScreen(navController) }
-        composable(Screen.FarmerOrders.route) { OrdersScreen(navController) }
-        composable(Screen.Earnings.route) { EarningsScreen(navController) }
+        composable(Screen.FarmerDashboard.route) { DashboardScreen(navController, lang, { lang = it }) }
+        composable(Screen.NewListing.route) { NewListingScreen(navController, lang, { lang = it }) }
+        composable(Screen.FarmerOrders.route) { OrdersScreen(navController, lang, { lang = it }) }
+        composable(Screen.Earnings.route) { EarningsScreen(navController, lang, { lang = it }) }
     }
 }
