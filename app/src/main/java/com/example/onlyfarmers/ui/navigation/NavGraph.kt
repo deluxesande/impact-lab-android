@@ -1,6 +1,10 @@
 package com.example.onlyfarmers.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -20,10 +24,12 @@ import com.example.onlyfarmers.ui.screens.farmer.OrdersScreen
 
 @Composable
 fun NavGraph(navController: NavHostController = rememberNavController()) {
+    var lang by remember { mutableStateOf("EN") }
+
     NavHost(navController = navController, startDestination = Screen.Splash.route) {
 
         composable(Screen.Splash.route) {
-            SplashScreen(navController = navController)
+            SplashScreen(navController = navController, lang = lang, onLangChange = { lang = it })
         }
 
         composable(
@@ -31,7 +37,7 @@ fun NavGraph(navController: NavHostController = rememberNavController()) {
             arguments = listOf(navArgument("role") { type = NavType.StringType }),
         ) { backStackEntry ->
             val role = backStackEntry.arguments?.getString("role") ?: "buyer"
-            AuthScreen(navController = navController, role = role)
+            AuthScreen(navController = navController, role = role, lang = lang, onLangChange = { lang = it })
         }
 
         // Consumer
