@@ -41,10 +41,10 @@ fun NavGraph(navController: NavHostController = rememberNavController()) {
         }
 
         // Consumer
-        composable(Screen.ConsumerHome.route) { HomeScreen(navController) }
-        composable(Screen.AiChat.route) { AiChatScreen(navController) }
-        composable(Screen.Cart.route) { CartScreen(navController) }
-        composable(Screen.Tracking.route) { TrackingScreen(navController) }
+        composable(Screen.ConsumerHome.route) { HomeScreen(navController, lang, { lang = it }) }
+        composable(Screen.AiChat.route) { AiChatScreen(navController, lang, { lang = it }) }
+        composable(Screen.Cart.route) { CartScreen(navController, lang, { lang = it }) }
+        composable(Screen.Tracking.route) { TrackingScreen(navController, lang, { lang = it }) }
 
         // Farmer
         composable(Screen.FarmerDashboard.route) { DashboardScreen(navController) }
